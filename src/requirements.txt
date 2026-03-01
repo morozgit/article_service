@@ -2,6 +2,7 @@ asgiref==3.11.1
 Django==6.0.2
 django-redis==6.0.0
 djangorestframework==3.16.1
+fakeredis==2.34.1
 gunicorn==25.1.0
 iniconfig==2.3.0
 packaging==26.0
@@ -12,4 +13,6 @@ pytest==9.0.2
 pytest-django==4.12.0
 python-dotenv==1.2.1
 redis==7.2.1
+ruff==0.15.4
+sortedcontainers==2.4.0
 sqlparse==0.5.5

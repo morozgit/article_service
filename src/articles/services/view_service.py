@@ -38,5 +38,7 @@ class ArticleService:
                 cnt = int(v)
                 article_counts[aid] = article_counts.get(aid, 0) + cnt
 
-        top_articles = sorted(article_counts.items(), key=lambda x: x[1], reverse=True)[:top_n]
+        top_articles = sorted(article_counts.items(), key=lambda x: x[1], reverse=True)[
+            :top_n
+        ]
         return top_articles

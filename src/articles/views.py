@@ -1,12 +1,11 @@
+from django.shortcuts import get_object_or_404
 from rest_framework import generics
-from .models import Article
-from .serializers import ArticleSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+
+from .models import Article
+from .serializers import ArticleSerializer
 from .services.view_service import ArticleService
-from django.shortcuts import get_object_or_404
-from django.utils import timezone
-from django.core.cache import cache
 
 
 class ArticleListCreateView(generics.ListCreateAPIView):
@@ -30,12 +29,12 @@ def popular_articles(request):
     articles = Article.objects.filter(id__in=article_ids)
     serializer = ArticleSerializer(articles, many=True)
 
-    article_dict = {a['id']: a for a in serializer.data}
+    article_dict = {a["id"]: a for a in serializer.data}
     result = []
     for aid, count in top_list:
         item = article_dict.get(aid)
         if item:
-            item['views_last_24h'] = count
+            item["views_last_24h"] = count
             result.append(item)
 
     return Response(result)
