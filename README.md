@@ -28,8 +28,43 @@ source src/venv/bin/activate
 ```bush 
 pip3 install -r src/requirements.txt
 ```
+## Переменные окружения
+
+### Создайте два файла в корне проекта
+Примеры
+
+- .env.local
+  ```
+    DEBUG=True
+    SECRET_KEY = "supersecret"
+    DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]
+
+    POSTGRES_DB=postgres
+    POSTGRES_USER=postgres
+    POSTGRES_PASSWORD=postgres
+    POSTGRES_HOST=localhost
+    POSTGRES_PORT=5432
+
+    REDIS_URL=redis://redis:6379/1
+  ```
+
+  - .env.docker
+  ```
+    DEBUG=True
+    SECRET_KEY = "supersecret"
+    DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]
+
+    POSTGRES_DB=postgres
+    POSTGRES_USER=postgres
+    POSTGRES_PASSWORD=postgres
+    POSTGRES_HOST=postgres
+    POSTGRES_PORT=5432
+
+    REDIS_URL=redis://redis:6379/1
+  ```
 
 ## Запуск
+
 
 - Из корня проекта сделайте миграцию и запустите сервер Django
 
