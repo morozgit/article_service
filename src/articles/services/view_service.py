@@ -4,21 +4,21 @@ from django.core.cache import cache
 from django.utils import timezone
 
 
-class ViewService:
+class ArticleService:
     BUCKET_PREFIX = "article:views:"
-    BUCKET_TTL = 60 * 60 * 25  # 25 часов
+    BUCKET_TTL = 60 * 60 * 25
 
     @staticmethod
     def _get_current_bucket_key():
         now = timezone.now()
-        return f"{ViewService.BUCKET_PREFIX}{now.strftime('%Y%m%d%H')}"
+        return f"{ArticleService.BUCKET_PREFIX}{now.strftime('%Y%m%d%H')}"
 
     @staticmethod
     def register_view(article_id: int):
         redis = cache.client.get_client(write=True)
-        bucket_key = ViewService._get_current_bucket_key()
+        bucket_key = ArticleService._get_current_bucket_key()
         redis.hincrby(bucket_key, article_id, 1)
-        redis.expire(bucket_key, ViewService.BUCKET_TTL)
+        redis.expire(bucket_key, ArticleService.BUCKET_TTL)
 
     @staticmethod
     def get_popular_articles(top_n=10):
@@ -26,7 +26,7 @@ class ViewService:
         now = timezone.now()
 
         keys = [
-            f"{ViewService.BUCKET_PREFIX}{(now - timedelta(hours=i)).strftime('%Y%m%d%H')}"
+            f"{ArticleService.BUCKET_PREFIX}{(now - timedelta(hours=i)).strftime('%Y%m%d%H')}"
             for i in range(24)
         ]
 
